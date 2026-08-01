@@ -1,0 +1,38 @@
+.auth-logo-link {
+  transition: opacity var(--transition-fast);
+}
+.auth-logo-link:hover,
+.auth-logo-link:focus-visible {
+  opacity: 0.85;
+}
+
+.auth-logo-img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  transition: transform var(--transition-base);
+}
+.auth-logo-link:hover .auth-logo-img {
+  transform: rotate(-6deg) scale(1.06);
+}
+
+.auth-back-link {
+  color: var(--color-text-muted);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast), background-color var(--transition-fast), transform var(--transition-fast);
+}
+.auth-back-link i {
+  transition: transform var(--transition-fast);
+}
+.auth-back-link:hover,
+.auth-back-link:focus-visible {
+  color: var(--color-primary);
+  background-color: var(--color-surface);
+  transform: translateX(-2px);
+}
+.auth-back-link:hover i {
+  transform: translateX(-3px);
+}
