@@ -1,0 +1,103 @@
+:root {
+  --color-primary: #3867d6;
+  --color-secondary: #2d98da;
+  --color-light: #d1d8e0;
+  --color-dark: #4b6584;
+
+  /* --- Derived tones (kept minimal, generated from the 4 base colors) --- */
+  --color-primary-rgb: 56, 103, 214;
+  --color-secondary-rgb: 45, 152, 218;
+  --color-white: #ffffff;
+  --color-surface: #f7f9fc;        /* near-white tint of --color-light for section backgrounds */
+  --color-text-muted: #6b7d94;     /* lightened --color-dark for secondary text */
+
+  /* --- Typography --- */
+  --font-heading: "Roboto Serif", serif;
+  --font-body: "Inter", sans-serif;
+
+  /* --- Motion --- */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  /* --- Elevation --- */
+  --shadow-sm: 0 2px 8px rgba(75, 101, 132, 0.08);
+  --shadow-md: 0 8px 24px rgba(75, 101, 132, 0.12);
+  --shadow-lg: 0 20px 40px rgba(56, 103, 214, 0.18);
+
+  /* --- Radius --- */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+section[id] {
+  scroll-margin-top: 76px;
+}
+
+.margin-rule {
+  position: relative;
+}
+
+.margin-rule::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  bottom: 0.15em;
+  width: 4px;
+  border-radius: 2px;
+  background: var(--color-secondary);
+}
+
+.btn-brand-primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 600;
+  padding: 0.65rem 1.6rem;
+  border-radius: var(--radius-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+}
+
+.btn-brand-primary:hover,
+.btn-brand-primary:focus-visible {
+  background-color: #2f56ba;
+  border-color: #2f56ba;
+  color: var(--color-white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-brand-outline {
+  background-color: transparent;
+  border: 1.5px solid var(--color-dark);
+  color: var(--color-dark);
+  font-weight: 600;
+  padding: 0.65rem 1.6rem;
+  border-radius: var(--radius-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast);
+}
+.btn-brand-outline:hover,
+.btn-brand-outline:focus-visible {
+  background-color: var(--color-dark);
+  color: var(--color-white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 2px;
+}

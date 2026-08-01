@@ -1,0 +1,10 @@
+.custom_css_header{
+  background-color: var(--color-white);
+}
+
+.custom_css_nav-link:hover{
+  text-decoration: underline;
+  background-color: var(--color-primary);
+  color: var(--color-white) !important;
+  transition: var(--transition-base);
+}
