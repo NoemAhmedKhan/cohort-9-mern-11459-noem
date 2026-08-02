@@ -1,5 +1,4 @@
 import "./About.css";
-import { Link } from "react-router-dom";
 
 function About() {
   return (
@@ -16,11 +15,11 @@ function About() {
               Note Taker is a full-stack note management app that helps you capture, organize, and manage your thoughts effortlessly.
               Create your account, write notes with a rich text editor, and keep your ideas at one place with secure database storage.
             </p>
-            <Link to="/signup" className="link">
-              <button type="button" className="btn btn-outline-dark mt-4">
+            <div className="mt-4">
+              <a href="#" className="btn btn-brand-outline">
                 Get Started
-              </button>
-            </Link>
+              </a>
+            </div>
           </div>
 
         </div>
