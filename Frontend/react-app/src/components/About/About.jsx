@@ -1,4 +1,5 @@
 import "./About.css";
+import { Link } from "react-router-dom";
 
 function About() {
   return (
@@ -16,9 +17,9 @@ function About() {
               Create your account, write notes with a rich text editor, and keep your ideas at one place with secure database storage.
             </p>
             <div className="mt-4">
-              <a href="#" className="btn btn-brand-outline">
+              <Link to="/signup" className="btn btn-brand-outline">
                 Get Started
-              </a>
+              </Link>
             </div>
           </div>
 
