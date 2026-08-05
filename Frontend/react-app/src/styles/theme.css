@@ -4,12 +4,12 @@
   --color-light: #d1d8e0;
   --color-dark: #4b6584;
 
-  /* --- Derived tones (kept minimal, generated from the 4 base colors) --- */
+  /* --- Derived tones (generated from the 4 base colors) --- */
   --color-primary-rgb: 56, 103, 214;
   --color-secondary-rgb: 45, 152, 218;
   --color-white: #ffffff;
-  --color-surface: #f7f9fc;        /* near-white tint of --color-light for section backgrounds */
-  --color-text-muted: #6b7d94;     /* lightened --color-dark for secondary text */
+  --color-surface: #f7f9fc;
+  --color-text-muted: #6b7d94;
 
   /* --- Typography --- */
   --font-heading: "Roboto Serif", serif;
