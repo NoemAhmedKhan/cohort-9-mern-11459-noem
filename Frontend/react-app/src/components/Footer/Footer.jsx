@@ -11,18 +11,18 @@ function Footer() {
           <div className="container">
             <div className="row align-items-center justify-content-evenly">
               <div className="col-9 col-md-3 mt-2">
-                <a href="#home" className="navbar-brand">
+                <a href="#home" className="navbar-brand footer-logo-anchor">
                   <img src={logo} className="img-fluid w-25 mt-2 mb-2 rounded" alt="Note Taker Logo"/>
                 </a>
-                <p className="text-center custom_css_footer_text">
+                <p className="footer-text">
                   A secure, full-stack space to write, organize, and find your
                   notes whenever you need them.
                 </p>
               </div>
 
               <div className="col-9 col-md-3 mt-5">
-                <h3 className="custom_css_footer_heading">Quick links</h3>
-                <ul className="text-center list-unstyled custom_css_footer_text">
+                <h3 className="footer-heading">Quick links</h3>
+                <ul className="list-unstyled footer-text">
                   <li className="footer-nav-links"> <a className="text-decoration-none" href="#about">About</a></li>
                   <li className="footer-nav-links"> <a className="text-decoration-none" href="#features">Features</a></li>
                   <li className="footer-nav-links"> <a className="text-decoration-none" href="#contact">Contact</a></li>
@@ -30,14 +30,14 @@ function Footer() {
               </div>
 
               <div className="col-9 col-md-3 mt-5">
-                <h3 className="custom_css_footer_heading">Get in touch</h3>
-                <ul className="custom_css_footer_text custom_css_email list-unstyled">
+                <h3 className="footer-heading">Get in touch</h3>
+                <ul className="footer-text email list-unstyled">
                   <li>
                     <i className="fa-solid fa-envelope"></i>
                     <a href="mailto:noemahmedkhan8307@gmail.com">noemahmedkhan8307@gmail.com</a>
                   </li>
                 </ul>
-                <div className="d-flex justify-content-evenly custom_css_footer_social">
+                <div className="d-flex justify-content-evenly footer-social">
                   <a href="https://github.com/NoemAhmedKhan" target="_blank" aria-label="Note Taker on GitHub">
                     <i className="fa-brands fa-github"></i>
                   </a>

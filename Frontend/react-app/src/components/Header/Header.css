@@ -1,8 +1,12 @@
-.custom_css_header{
+.header{
   background-color: var(--color-white);
 }
 
-.custom_css_nav-link:hover{
+.header-logo-anchor:hover img {
+  transform: rotate(-6deg) scale(1.06);
+}
+
+.nav-link:hover{
   text-decoration: underline;
   background-color: var(--color-primary);
   color: var(--color-white) !important;

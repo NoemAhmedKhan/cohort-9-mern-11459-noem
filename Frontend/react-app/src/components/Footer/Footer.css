@@ -1,8 +1,13 @@
 .footer{
   background-color: var(--color-light);
+  text-align: center;
 }
 
-.custom_css_footer_heading{
+.footer-logo-anchor:hover img {
+  transform: rotate(-6deg) scale(1.06);
+}
+
+.footer-heading{
   font-family: var(--font-heading);
   text-align: center;
   font-size: 1.5rem;
@@ -10,7 +15,7 @@
   color: var(--color-dark);
 }
 
-.custom_css_footer_text{
+.footer-text{
   font-family: var(--font-body);
   font-size: 1.0rem;
   color: var(--color-dark);
@@ -25,22 +30,22 @@
   text-shadow: var(--shadow-sm);
 }
 
-.custom_css_email i{
+.email i{
   color: var(--color-dark);
 }
 
-.custom_css_email a{
+.email a{
   text-decoration: none;
   margin-left: 5px;
   transition: var(--transition-base);
 }
 
-.custom_css_email a:hover{
+.email a:hover{
   text-decoration: underline;
   text-shadow: var(--shadow-sm);
 }
 
-.custom_css_footer_social a {
+.footer-social a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -53,7 +58,7 @@
   transition: transform var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
 }
 
-.custom_css_footer_social a:hover {
+.footer-social a:hover {
   background-color: var(--color-secondary);
   border-color: var(--color-secondary);
   color: var(--color-white);
