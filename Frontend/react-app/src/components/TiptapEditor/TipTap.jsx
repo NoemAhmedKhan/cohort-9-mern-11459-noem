@@ -11,10 +11,20 @@ const Tiptap = () => {
 
     const navigate = useNavigate();
     const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
 
     const handleChange = (e) => {
         setTitle(e.target.value);
+    }
+
+    const handleSave = () => {
+        const note = {
+            title: title,
+            content: editor.getJSON()
+        }
+    }
+
+    const handleCancel = () => {
+        navigate("/dashboard");
     }
 
     const editor = useEditor({
@@ -39,14 +49,8 @@ const Tiptap = () => {
 
             <div className="card w-100 border-0">
                 <div className="card-body d-flex justify-content-end">
-                    <button type="button" className="btn mx-1 btn-cancel">Cancel</button>
-                    <button type="button" className="btn mx-1 btn-save" onClick={() => {
-                        setContent(editor.getText());
-                        console.log(title);
-                        console.log(content);
-                    }}>
-                        Save
-                    </button>
+                    <button type="button" className="btn mx-1 btn-cancel" onClick={handleCancel}> Cancel </button>
+                    <button type="button" className="btn mx-1 btn-save" onClick={handleSave}> Save </button>
                 </div>
             </div>
         </div>
