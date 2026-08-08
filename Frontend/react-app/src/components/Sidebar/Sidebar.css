@@ -75,6 +75,11 @@
   flex-shrink: 0;
 }
 
+.sidebar-brand-icon:hover img {
+  cursor: pointer;
+  transform: rotate(-6deg) scale(1.06);
+}
+
 .sidebar-brand-text {
   font-family: var(--font-heading, "Roboto Serif", serif);
   font-weight: 700;
