@@ -1,0 +1,20 @@
+.editor-toolbar {
+  width: 100%;
+  box-shadow: var(--shadow-sm);
+  font-size: 0.9rem;
+  font-family: var(--font-heading);
+  min-height: 45px;
+}
+
+.toolbar-btn {
+  border: none;
+  background: none;
+  color: var(--color-dark);
+  transition: var(--transition-base);
+  min-width: 34px;
+}
+
+.toolbar-btn:hover {
+  background-color: rgba(56, 103, 214, 0.1);
+  color: var(--color-primary, #3867d6);
+}
