@@ -1,11 +1,9 @@
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { useEditor, EditorContent } from '@tiptap/react'
-import { FloatingMenu, BubbleMenu } from '@tiptap/react/menus'
 import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
 import TextAlign from '@tiptap/extension-text-align'
-import Color from "@tiptap/extension-color"
 import Toolbar from "./Toolbar"
 import "./TipTap.css"
 
@@ -22,7 +20,6 @@ const Tiptap = () => {
     const editor = useEditor({
         extensions: [
             StarterKit,
-            Color,
             TextAlign.configure({
                 types: ["heading", "paragraph"]
             })
