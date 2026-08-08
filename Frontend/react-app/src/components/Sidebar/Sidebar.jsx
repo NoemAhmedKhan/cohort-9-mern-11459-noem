@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./Sidebar.css";
 import logo from "../../assets/logo.png";
 
@@ -25,7 +25,7 @@ function Sidebar() {
     // BACKEND LOGIC
     localStorage.removeItem("TOKEN");
     localStorage.removeItem("USER");
-    <Link to="/login" />
+    navigate("/login");
   };
 
   return (
@@ -43,12 +43,9 @@ function Sidebar() {
       {isOpen && <div className="sidebar-backdrop d-lg-none" onClick={closeSidebar}></div>}
 
       <aside className={`sidebar ${isOpen ? "sidebar--open" : ""}`}>
-        <div className="navbar-brand">
-          <img src={logo} className="img-fluid w-25" alt="Note Taker Logo"/>
-        </div>
         <div className="sidebar-brand">
           <span className="sidebar-brand-icon">
-            <i className="fa-solid fa-note-sticky"></i>
+            <img src={logo} className="img-fluid" alt="Note Taker Logo"/>
           </span>
           <span className="sidebar-brand-text">Note Taker</span>
           <button className="sidebar-close-btn d-lg-none" onClick={closeSidebar} aria-label="Close sidebar">
