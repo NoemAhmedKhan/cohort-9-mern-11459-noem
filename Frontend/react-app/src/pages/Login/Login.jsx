@@ -33,7 +33,7 @@ function Login() {
     e.preventDefault();
     if (validate()) {
       console.log("Login form valid:", formData);
-      navigate("/noteeditor");
+      navigate("/note-editor");
     }
   };
 

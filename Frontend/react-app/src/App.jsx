@@ -2,6 +2,7 @@ import "./styles/theme.css";
 import Home from "./pages/Home/Home";
 import Signup from "./pages/Signup/Signup";
 import Login from "./pages/Login/Login";
+import NoteEditor from "./pages/NoteEditor/NoteEditor"
 import { BrowserRouter, Router, Routes, Route } from "react-router-dom"
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+            <Route path="/note-editor" element={<NoteEditor />} />
         </Routes>
       </BrowserRouter>
   )
