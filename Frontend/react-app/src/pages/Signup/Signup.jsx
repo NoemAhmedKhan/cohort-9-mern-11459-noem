@@ -51,7 +51,7 @@ function Signup() {
 
       <div className="flex-grow-1 d-flex align-items-center justify-content-center py-5">
         <div className="card shadow-sm border-0 p-4 p-md-5 auth-card" style={{ maxWidth: "420px", width: "100%" }}>
-          <h1 className="h3 mb-1" style={{ color: "var(--color-dark, #4b6584)" }}>Create your account</h1>
+          <h3 className="h3 mb-1" style={{ color: "var(--color-dark, #4b6584)" }}>Create account</h3>
           <p className="text-secondary mb-4">Start taking notes with Note Taker.</p>
 
           <form noValidate onSubmit={handleSubmit}>

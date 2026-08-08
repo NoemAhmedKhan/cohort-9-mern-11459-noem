@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthHeader from "../../components/Auth/AuthHeader";
 import "./Login.css";
 
@@ -9,6 +9,7 @@ function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -32,6 +33,7 @@ function Login() {
     e.preventDefault();
     if (validate()) {
       console.log("Login form valid:", formData);
+      navigate("/noteeditor");
     }
   };
 
@@ -41,7 +43,7 @@ function Login() {
 
       <div className="flex-grow-1 d-flex align-items-center justify-content-center py-5">
         <div className="card shadow-sm border-0 p-4 p-md-5 auth-card" style={{ maxWidth: "420px", width: "100%" }}>
-          <h1 className="h3 mb-1" style={{ color: "var(--color-dark, #4b6584)" }}>Welcome back</h1>
+          <h3 className="h3 mb-1" style={{ color: "var(--color-dark, #4b6584)" }}>Welcome back</h3>
           <p className="text-secondary mb-4">Log in to your Note Taker account.</p>
 
           <form noValidate onSubmit={handleSubmit}>
