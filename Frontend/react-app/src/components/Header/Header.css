@@ -1,0 +1,14 @@
+.header{
+  background-color: var(--color-white);
+}
+
+.header-logo-anchor:hover img {
+  transform: rotate(-6deg) scale(1.06);
+}
+
+.nav-link:hover{
+  text-decoration: underline;
+  background-color: var(--color-primary);
+  color: var(--color-white) !important;
+  transition: var(--transition-base);
+}

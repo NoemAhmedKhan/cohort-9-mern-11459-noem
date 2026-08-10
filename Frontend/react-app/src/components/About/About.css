@@ -1,0 +1,42 @@
+.about-section {
+  text-align: center;
+  padding: 4rem 0;
+  background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-white) 100%);
+}
+
+.about-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  line-height: 1.05;
+  margin-bottom: 0.75rem;
+  color: var(--color-dark);
+}
+
+.about-tagline {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--color-primary);
+  margin-bottom: 1.25rem;
+}
+
+.about-description {
+  font-size: 1.0rem;
+  font-family: var(--font-body);
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  text-align: justify;
+  padding: 0 0.8rem;
+}
+
+.link {
+  font-family: var(--font-body);
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--color-dark);
+}
+
+.link:hover {
+  color: var(--color-light);
+}

@@ -1,0 +1,76 @@
+.features-section {
+  padding: 0.6rem 0;
+  background-color: var(--color-surface);
+  text-align: center;
+}
+
+.features-heading {
+  max-width: 40rem;
+  margin: 0 auto 3.5rem;
+}
+
+.about-eyebrow-center {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin: 0.3rem 0;
+}
+
+.features-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-dark);
+}
+
+.features-subtitle {
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+}
+
+.feature-card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-light);
+  border-radius: var(--radius-md);
+  padding: 2rem 1.75rem;
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: var(--color-white);
+  font-size: 1.25rem;
+  margin-bottom: 1.25rem;
+  transition: transform var(--transition-base);
+}
+
+.feature-card:hover .feature-icon {
+  transform: rotate(-6deg) scale(1.05);
+}
+
+.feature-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  color: var(--color-dark);
+}
+
+.feature-description {
+  color: var(--color-text-muted);
+  font-size: 1.0rem;
+  line-height: 1.65;
+  margin-bottom: 0;
+}
