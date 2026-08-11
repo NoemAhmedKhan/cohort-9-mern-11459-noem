@@ -1,14 +1,14 @@
 import Sidebar from "../../components/Sidebar/Sidebar"
 import NoteEditor from "../../components/NoteEditor/NoteEditor"
 
-function NoteEditor() {
+function NoteEditorPage() {
 
   return (
       <>
           <Sidebar />
-      <NoteEditor mode="create" note={{id: 1, title: "First Note", content: "NOPE!!!"}} />
+      <NoteEditor />
         </>
   );
 }
 
-export default NoteEditor;
+export default NoteEditorPage;
