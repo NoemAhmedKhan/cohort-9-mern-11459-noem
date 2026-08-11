@@ -1,0 +1,19 @@
+.delete-modal-content {
+    box-shadow: var(--shadow-sm);
+}
+
+.delete-modal-icon {
+    font-size: 1.5rem;
+    color: var(--color-dark);
+}
+
+.delete-modal-content h5 {
+    font-family: var(--font-heading);
+    color: var(--color-dark);
+}
+
+.delete-modal-content p {
+    font-family: var(--font-body);
+    color: var(--color-dark);
+    opacity: 0.75;
+}
