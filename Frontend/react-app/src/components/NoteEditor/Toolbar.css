@@ -1,5 +1,6 @@
 .editor-toolbar {
   width: 100%;
+  height: calc(100% - 85%);
   box-shadow: var(--shadow-sm);
   font-size: 0.9rem;
   font-family: var(--font-heading);
@@ -17,4 +18,24 @@
 .toolbar-btn:hover {
   background-color: rgba(56, 103, 214, 0.1);
   color: var(--color-primary, #3867d6);
+}
+
+@media (max-width: 1000px) {
+  .editor-toolbar {
+    height: calc(100% - 83%);
+  }
+
+  .toolbar-btn {
+    min-width: 28px;
+  }
+}
+
+@media (max-width: 599px) {
+  .editor-toolbar {
+    height: calc(100% - 80%);
+  }
+
+  .toolbar-btn {
+    min-width: 20px;
+  }
 }
