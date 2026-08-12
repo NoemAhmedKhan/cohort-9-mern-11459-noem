@@ -16,13 +16,12 @@ function About() {
               Note Taker is a full-stack note management app that helps you capture, organize, and manage your thoughts effortlessly.
               Create your account, write notes with a rich text editor, and keep your ideas at one place with secure database storage.
             </p>
-            <div className="mt-4">
-              <Link to="/signup" className="btn btn-brand-outline">
+            <Link to="/signup" className="link">
+              <button type="button" className="btn btn-outline-dark mt-4">
                 Get Started
-              </Link>
-            </div>
+              </button>
+            </Link>
           </div>
-
         </div>
       </div>
     </section>
