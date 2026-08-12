@@ -1,0 +1,45 @@
+@keyframes authCardIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.auth-card {
+  animation: authCardIn 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: box-shadow var(--transition-base);
+}
+.auth-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.auth-input-group {
+  border-radius: var(--radius-sm);
+  transition: box-shadow var(--transition-fast);
+}
+
+.auth-input-group span{
+  background-color: var(--color-secondary);
+}
+
+.auth-input-group span i{
+  color: var(--color-surface);
+}
+
+.auth-input-group:focus-within {
+  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.15);
+}
+
+.auth-toggle-btn {
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+.auth-toggle-btn:hover,
+.auth-toggle-btn:focus-visible {
+  color: var(--color-secondary);
+  background-color: var(--color-surface);
+}
+
+.auth-link {
+  transition: color var(--transition-fast);
+}
+.auth-link:hover,
+.auth-link:focus-visible {
+  color: var(--color-secondary) !important;
+}
