@@ -7,7 +7,7 @@ function Header() {
     <header className="sticky-top header">
       <nav className="navbar navbar-expand-lg navbar-light">
         <div className="container">
-          <a href="#home" className="navbar-brand header-logo-anchor">
+          <a href="/" className="navbar-brand header-logo-anchor">
             <img src={logo} className="img-fluid w-25" alt="Note Taker Logo"/>
           </a>
 

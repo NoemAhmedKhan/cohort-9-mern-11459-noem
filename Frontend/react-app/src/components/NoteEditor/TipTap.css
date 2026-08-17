@@ -1,0 +1,55 @@
+/* PROSE MIRROR CLASS ALREADY APPLIED ON EDITOR CONTENT */
+.editor-content {
+    outline: none;
+    width: 100%;
+    height: calc(100% - 15%);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.5;
+    text-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-light);
+    border-top: none;
+}
+
+.editor-content .ProseMirror{
+    border: 0;
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+    overflow-y: scroll;
+    color: var(--color-dark);
+}
+
+.editor-content .ProseMirror:focus {
+    outline-color: var(--color-light);
+}
+
+.ProseMirror h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    font-family: var(--font-heading);
+}
+
+.ProseMirror h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-family: var(--font-heading);
+}
+
+.ProseMirror h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    font-family: var(--font-heading);
+}
+
+@media (max-width: 1000px) {
+    .editor-content {
+        height: calc(100% - 17%);
+    }
+}
+
+@media (max-width: 599px) {
+    .editor-content {
+        height: calc(100% - 20%);
+    }
+}

@@ -45,7 +45,7 @@ function Footer() {
                     <i className="fa-brands fa-linkedin"></i>
                   </a>
                   <a href="https://wa.me/923452971536" target="_blank" aria-label="Note Taker on Whatsapp">
-                    <i class="fa-brands fa-square-whatsapp"></i>
+                    <i className="fa-brands fa-square-whatsapp"></i>
                   </a>
                 </div>
               </div>

@@ -1,0 +1,35 @@
+.note-editor{
+    width: calc(100% - 5%);
+    height: 100vh;
+}
+
+.note-editor input {
+    color: var(--color-dark);
+    font-size: 1.8rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+}
+
+.note-editor input:focus {
+    color: var(--color-dark);
+    border-color: var(--color-dark);
+    box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 1300px) and (max-width: 1500px) {
+.note-editor{
+    width: calc(100% - 14%);
+}
+}
+
+@media (min-width: 980px) and (max-width: 1299px) {
+    .note-editor{
+        width: calc(100% - 25%);
+    }
+}
+
+@media (max-width: 900px) {
+    .note-editor{
+        margin-top: 60px;
+    }
+}

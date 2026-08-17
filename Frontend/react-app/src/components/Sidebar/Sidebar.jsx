@@ -5,7 +5,7 @@ import logo from "../../assets/logo.png";
 
 const NAV_ITEMS = [
   { icon: "fa-solid fa-table-columns", label: "Dashboard", path: "/dashboard", match: "/dashboard" },
-  { icon: "fa-solid fa-pen-to-square", label: "Note Editor", path: "/notes/new", match: "/notes" },
+  { icon: "fa-solid fa-pen-to-square", label: "Note Editor", path: "/notes/create", match: "/notes/create" },
   { icon: "fa-solid fa-user", label: "Profile", path: "/profile", match: "/profile" },
 ];
 
