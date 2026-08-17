@@ -1,0 +1,16 @@
+.profile-card {
+    max-width: 480px;
+    border-radius: 0.75rem;
+    font-family: var(--font-body);
+}
+
+.profile-avatar {
+    width: 72px;
+    height: 72px;
+    font-size: 1.75rem;
+}
+
+.profile-card h4 {
+    font-family: var(--font-heading);
+    color: var(--color-dark);
+}

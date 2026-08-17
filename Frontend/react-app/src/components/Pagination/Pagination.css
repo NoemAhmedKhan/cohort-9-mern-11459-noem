@@ -1,0 +1,52 @@
+.pagination-main {
+    width: calc(100% - 5%);
+}
+
+.note-card {
+    border: 1px solid var(--color-light);
+    transition: var(--transition-fast);
+}
+
+.note-card:hover {
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+}
+
+.note-card .card-title {
+    font-family: var(--font-heading);
+    color: var(--color-dark);
+}
+
+.note-preview {
+    font-family: var(--font-body);
+    color: var(--color-dark);
+    opacity: 0.75;
+}
+
+.pagination .page-link {
+    color: var(--color-secondary);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--color-secondary);
+    border-color: var(--color-secondary);
+    color: var(--color-white);
+}
+
+@media (min-width: 1300px) and (max-width: 1500px) {
+    .pagination-main{
+        width: calc(100% - 13%);
+    }
+}
+
+@media (min-width: 980px) and (max-width: 1299px) {
+    .pagination-main{
+        width: calc(100% - 25%);
+    }
+}
+
+@media (max-width: 800px) {
+    .pagination-main{
+
+    }
+}
