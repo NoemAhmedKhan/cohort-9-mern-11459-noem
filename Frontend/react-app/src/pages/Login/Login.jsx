@@ -46,11 +46,11 @@ function Login() {
           <p className="text-secondary mb-4">Log in to your Note Taker account.</p>
 
           <form noValidate onSubmit={handleSubmit}>
-            {/* EMAIL */}
             <div className="mb-3">
               <label htmlFor="email" className="form-label">Email address</label>
               <div className="input-group has-validation auth-input-group">
                 <span className="input-group-text"><i className="fa-solid fa-envelope"></i></span>
+                {/* EMAIL */}
                 <input
                   type="email"
                   id="email"
@@ -65,11 +65,11 @@ function Login() {
               </div>
             </div>
 
-            {/* PASSWORD */}
             <div className="mb-4">
               <label htmlFor="password" className="form-label">Password</label>
               <div className="input-group has-validation auth-input-group">
                 <span className="input-group-text"><i className="fa-solid fa-lock"></i></span>
+                {/* PASSWORD */}
                 <input
                   type={showPassword ? "text" : "password"}
                   id="password"

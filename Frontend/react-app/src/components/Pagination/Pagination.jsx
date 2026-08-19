@@ -6,7 +6,6 @@ const NOTES_PER_PAGE = 12;
 
 const Pagination = ({ notes }) => {
     const [currentPage, setCurrentPage] = useState(1);
-
     const totalPages = Math.ceil(notes.length / NOTES_PER_PAGE);
     const startIndex = (currentPage - 1) * NOTES_PER_PAGE;
     const currentNotes = notes.slice(startIndex, startIndex + NOTES_PER_PAGE);
