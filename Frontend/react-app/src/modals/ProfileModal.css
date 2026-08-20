@@ -1,0 +1,9 @@
+.profile-modal-content {
+    box-shadow: var(--shadow-sm);
+    font-family: var(--font-body);
+}
+
+.profile-modal-content .modal-title {
+    font-family: var(--font-heading);
+    color: var(--color-dark);
+}

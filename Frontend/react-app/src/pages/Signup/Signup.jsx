@@ -55,11 +55,11 @@ function Signup() {
           <p className="text-secondary mb-4">Start taking notes with Note Taker.</p>
 
           <form noValidate onSubmit={handleSubmit}>
-            {/* FULL NAME */}
             <div className="mb-3">
               <label htmlFor="fullName" className="form-label">Full name</label>
               <div className="input-group has-validation auth-input-group">
                 <span className="input-group-text"><i className="fa-solid fa-user"></i></span>
+                {/* FULL NAME */}
                 <input
                   type="text"
                   id="fullName"
@@ -74,11 +74,11 @@ function Signup() {
               </div>
             </div>
 
-            {/* EMAIL */}
             <div className="mb-3">
               <label htmlFor="email" className="form-label">Email address</label>
               <div className="input-group has-validation auth-input-group">
                 <span className="input-group-text"><i className="fa-solid fa-envelope"></i></span>
+                {/* EMAIL */}
                 <input
                   type="email"
                   id="email"
@@ -93,11 +93,11 @@ function Signup() {
               </div>
             </div>
 
-            {/* PASSWORD */}
             <div className="mb-3">
               <label htmlFor="password" className="form-label">Password</label>
               <div className="input-group has-validation auth-input-group">
                 <span className="input-group-text"><i className="fa-solid fa-lock"></i></span>
+                {/* PASSWORD */}
                 <input
                   type={showPassword ? "text" : "password"}
                   id="password"
@@ -120,11 +120,11 @@ function Signup() {
               </div>
             </div>
 
-            {/* CONFIRM PASSWORD */}
             <div className="mb-4">
               <label htmlFor="confirm" className="form-label">Confirm password</label>
               <div className="input-group has-validation auth-input-group">
                 <span className="input-group-text"><i className="fa-solid fa-lock"></i></span>
+                {/* CONFIRM PASSWORD */}
                 <input
                   type={showConfirm ? "text" : "password"}
                   id="confirm"
