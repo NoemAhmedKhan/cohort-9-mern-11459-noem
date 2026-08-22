@@ -6,8 +6,6 @@ const userRouter = require("./routes/users");
 const notesRouter = require("./routes/notes");
 const { PORT } = require("./config/env");
 
-connectDB();
-
 app.use(express.urlencoded({extended: true}));
 app.use(express.json({extended: true}));
 app.use(cookieParser());
