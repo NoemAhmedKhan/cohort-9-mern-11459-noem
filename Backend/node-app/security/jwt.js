@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const secretKey = "NT-1001$n.ak@JS";
+const { JWT_SECRET } = require("../config/env");
 
 const generateJWT = async (user) => {
     const payload = {
@@ -8,11 +8,11 @@ const generateJWT = async (user) => {
         email: user.email
     }
 
-    return jwt.sign(payload, secretKey, {expiresIn: '12h'});
+    return jwt.sign(payload, JWT_SECRET, {expiresIn: '12h'});
 }
 
 const verifyJWT = async (token) => {
-    return jwt.verify(token, secretKey);
+    return jwt.verify(token, JWT_SECRET);
 }
 
 module.exports = { generateJWT, verifyJWT };

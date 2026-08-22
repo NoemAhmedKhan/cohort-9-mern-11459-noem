@@ -1,6 +1,7 @@
 const User = require("../models/users");
 const { generateJWT } = require("../security/jwt");
 const bcrypt = require("bcrypt");
+const { NODE_ENV } = require("../config/env");
 
 const handleSignup = async (req, res) => {
     try{
@@ -34,7 +35,7 @@ const handleLogin = async (req, res) => {
             res.cookie('token', jwtToken, {
                 maxAge: 43200000, // 12 HOUR EXPIRATION TIME
                 httpOnly: true,
-                secure: false,
+                secure: NODE_ENV === "production",
                 sameSite: 'lax'
             });
 

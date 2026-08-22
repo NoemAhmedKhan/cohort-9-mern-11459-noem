@@ -26,12 +26,13 @@ const schema = mongoose.Schema({
 }, { timestamps: true });
 
 schema.pre('save', async function () {
-    if (!this.isModified('password')) return next();
+    if (!this.isModified('password')) return;
 
     try {
         const saltRound = 12;
         this.password = await bcrypt.hash(this.password, saltRound);
     } catch (error) {
+        this.abort(error);
         console.error(error);
     }
 });
