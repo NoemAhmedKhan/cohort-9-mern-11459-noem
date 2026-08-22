@@ -32,8 +32,7 @@ schema.pre('save', async function () {
         const saltRound = 12;
         this.password = await bcrypt.hash(this.password, saltRound);
     } catch (error) {
-        this.abort(error);
-        console.error(error);
+        throw new Error('Save password failed!');
     }
 });
 
