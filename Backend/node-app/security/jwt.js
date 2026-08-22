@@ -12,7 +12,11 @@ const generateJWT = async (user) => {
 }
 
 const verifyJWT = async (token) => {
-    return jwt.verify(token, JWT_SECRET);
+    try {
+        return jwt.verify(token, JWT_SECRET);
+    }catch (error) {
+        console.error(error);
+    }
 }
 
 module.exports = { generateJWT, verifyJWT };
