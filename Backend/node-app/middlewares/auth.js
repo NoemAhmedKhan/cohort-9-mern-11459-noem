@@ -16,4 +16,63 @@ const validateForm = (req, res, next) => {
     return res.status(400).json({message: "Invalid Credentials!"});
 };
 
-module.exports = { validateForm };
+const authenticateUser = async (req, res, next) => {
+    try {
+        const token = req.cookies.token;
+        if(!token) return res.status(401).json({message: "Unauthorized!"});
+
+        const payload = await verifyJWT(token);
+        if(!payload) return res.status(401).json({message: "Unauthorized!"});
+
+        req.user = payload;
+        next();
+    } catch (error) {
+        return res.status(401).json({message: "Access Denied!"});
+    }
+};
+
+const validateNote = (req, res, next) => {
+    try {
+        const { title, content } = req.body;
+        // TITLE VALIDATION
+        if (typeof title !== "string") {
+            return res.status(400).json({message: "Title is not valid!"});
+        }
+
+        if (!title.trim()) {
+            return res.status(400).json({message: "Title is required!"});
+        }
+
+        if (title.trim().length > 100) {
+            return res.status(400).json({message: "Title should be less than 100 characters!"});
+        }
+
+        // CONTENT VALIDATION
+        if (
+            !content ||
+            typeof content !== "object" ||
+            Array.isArray(content)
+        ) {
+            return res.status(400).json({message: "Invalid content format!"});
+        }
+
+        if (content.type !== "doc") {
+            return res.status(400).json({message: "Invalid Tiptap document!"});
+        }
+
+        if (
+            !Array.isArray(content.content) ||
+            content.content.length === 0
+        ) {
+            return res.status(400).json({message: "Content should not be empty!"});
+        }
+
+        req.title = title;
+        req.content = content;
+        next();
+    }catch (error) {
+        res.status(400).json({message: "Error occurred!"});
+    }
+};
+
+module.exports = { authenticateUser, validateForm, validateNote };
