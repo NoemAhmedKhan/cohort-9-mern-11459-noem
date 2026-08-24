@@ -8,7 +8,7 @@ const handleSignup = async (req, res) => {
     try{
         const { fullName, email, password } = req.body;
         const user = await User.findOne({email: email});
-        if(user) return res.status(400).json({message: "User already exist with this email!"});
+        if(user) return res.status(400).json({message: "This email is already registered!"});
 
         await User.create(
             {
@@ -75,7 +75,7 @@ const handleEditProfile = async (req, res) => {
         res.cookie('token', jwtToken, {
             maxAge: 43200000, // 12 HOUR EXPIRATION TIME
             httpOnly: true,
-            secure: false,
+            secure: NODE_ENV === "production",
             sameSite: 'lax'
         });
 
@@ -94,7 +94,7 @@ const handleChangePassword = async (req, res) => {
         if(!isMatch) return res.status(400).json({message: "Wrong password! please enter a valid password."});
 
         user.password = newPassword;
-        user.save();
+        await user.save();
         return res.status(200).json({message: "Password changed successfully!"});
     }catch (error) {
         res.status(401).json({message: "Access Denied!"});
