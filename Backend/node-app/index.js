@@ -5,8 +5,6 @@ const connectDB = require("./connection");
 const userRouter = require("./routes/users");
 const { PORT } = require("./config/env");
 
-connectDB();
-
 app.use(express.urlencoded({extended: true}));
 app.use(express.json({extended: true}));
 app.use(cookieParser());
