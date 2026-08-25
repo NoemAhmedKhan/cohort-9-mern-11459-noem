@@ -13,6 +13,13 @@ function NoteEditor() {
     const isReadOnly = mode === "view";
     const tiptapRef = useRef(null);
 
+    // IF-LOGIC TO AVOID IRRELEVANT MODE CALL
+    useEffect(() => {
+        if (id && mode !== "view" && mode !== "edit") {
+            navigate("/dashboard");
+        }
+    }, [id, mode, navigate]);
+
     const createNote = async () => {
         const note = {
             title: title,
@@ -71,7 +78,7 @@ function NoteEditor() {
 
     const onSave = async () => {
         if(mode === "edit") await editNote();
-        else await createNote();
+        else if(!id) await createNote();
     }
 
     const onConfirmDelete = async () => {
