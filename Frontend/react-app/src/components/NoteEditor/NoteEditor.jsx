@@ -13,85 +13,181 @@ function NoteEditor() {
     const isReadOnly = mode === "view";
     const tiptapRef = useRef(null);
 
-    const onSave = () => {
+    const createNote = async () => {
         const note = {
             title: title,
             content: tiptapRef.current.getContent()
         }
 
-    //     POST API
+        try {
+            const res = await fetch(`http://localhost:8080/notes/create`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(note)
+            });
+
+            const data = await res.json();
+            console.log(`Status: ${res.status}`, 'Data:', data);
+            if(res.status === 401) {
+                localStorage.removeItem("USER");
+                navigate("/login");
+            }
+            if(res.ok) navigate("/dashboard");
+        } catch (err) {
+            console.error(err);
+        }
     }
 
-    const onConfirmDelete = () => {
-    //     DELETE API
+    const editNote = async () => {
+        const note = {
+            title: title,
+            content: tiptapRef.current.getContent()
+        }
 
-        navigate("/dashboard");
+        try {
+            const res = await fetch(`http://localhost:8080/notes/${id}/edit`, {
+                method: 'PATCH',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(note)
+            });
+
+            const data = await res.json();
+            console.log(`Status: ${res.status}`, 'Data:', data);
+            if(res.status === 401) {
+                localStorage.removeItem("USER");
+                navigate("/login");
+            }
+            if(res.ok) navigate("/dashboard");
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    const onSave = async () => {
+        if(mode === "edit") await editNote();
+        else await createNote();
+    }
+
+    const onConfirmDelete = async () => {
+        try {
+            const res = await fetch(`http://localhost:8080/notes/${id}/delete`, {
+                method: 'DELETE',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            });
+
+            const data = await res.json();
+            console.log(`Status: ${res.status}`, 'Data:', data);
+            if(res.status === 401) {
+                localStorage.removeItem("USER");
+                navigate("/login");
+            }
+            if(res.ok) navigate("/dashboard");
+        } catch (err) {
+            console.error(err);
+        }
     }
 
     const onCancelDelete = () => {
-        navigate(`/notes/${id}/view`);
+        setShowDeleteModal(false);
     }
 
-    useEffect(
-        () => {
-        //     GET API
-        //     Set Note Title
-        //     Set Note Content
+    useEffect(() => {
+            // Incase of /notes/create just return
+            if(!id) return;
+
+            // Incase of /notes/id/view
+            const fetchNote = async () => {
+                try {
+                    const res = await fetch(`http://localhost:8080/notes/${id}/view`, {
+                        method: 'GET',
+                        credentials: 'include',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    const data = await res.json();
+                    console.log(`Status: ${res.status}`, 'Data:', data);
+                    if(res.status === 401) {
+                        localStorage.removeItem("USER");
+                        navigate("/login");
+                        return;
+                    }
+
+                    if(res.ok) {
+                        setTitle(data.title);
+                        tiptapRef.current.setContent(data.content);
+                    }
+                } catch (err) {
+                    console.error(err);
+                }
+            }
+
+            fetchNote();
         }, [id]
     );
 
     return (
         <>
-        {showDeleteModal && (
-            <DeleteConfirmModal
-                noteTitle={title}
-                onConfirm={onConfirmDelete}
-                onCancel={onCancelDelete}
-            />
-    )}
-
-        <div className="note-editor p-3 d-flex flex-column align-self-end">
-            <div className="w-100">
-                <input
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    className="form-control"
-                    id="exampleFormControlInput1"
-                    placeholder="Your Title"
-                    readOnly={isReadOnly}
+            {showDeleteModal && (
+                <DeleteConfirmModal
+                    noteTitle={title}
+                    onConfirm={onConfirmDelete}
+                    onCancel={onCancelDelete}
                 />
-            </div>
+            )}
 
-            <TipTap
-                key={id}
-                content={content || ""}
-                editable={!isReadOnly}
-                ref={tiptapRef}
-            />
-
-            {
-                (isReadOnly) ? (
-                <div className="card w-100 border-0 mt-2">
-                    <div className="card-body d-flex justify-content-end">
-                    <button type="button" className="btn btn btn-outline-success mx-1" onClick={() => navigate(`/notes/${id}/edit`)}>
-                        <i className="fa-solid fa-pen me-2"></i>Edit
-                    </button>
-                    <button type="button" className="btn btn btn-outline-danger mx-1" onClick={() => setShowDeleteModal(true)}>
-                        <i className="fa-solid fa-trash-can me-2"></i>Delete
-                    </button>
-                    </div>
+            <div className="note-editor p-3 d-flex flex-column align-self-end">
+                <div className="w-100">
+                    <input
+                        type="text"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        className="form-control"
+                        id="exampleFormControlInput1"
+                        placeholder="Your Title"
+                        readOnly={isReadOnly}
+                    />
                 </div>
-            ) : (
-                    <div className="card w-100 border-0 mt-2">
-                        <div className="card-body d-flex justify-content-end">
-                            <button type="button" className="btn btn-outline-secondary mx-1" onClick={() => navigate("/dashboard")}> Cancel </button>
-                            <button type="button" className="btn btn-outline-primary mx-1" onClick={onSave}> Save </button>
+
+                <TipTap
+                    key={id}
+                    content={content || ""}
+                    editable={!isReadOnly}
+                    ref={tiptapRef}
+                />
+
+                {
+                    (isReadOnly) ? (
+                        <div className="card w-100 border-0 mt-2">
+                            <div className="card-body d-flex justify-content-end">
+                                <button type="button" className="btn btn btn-outline-success mx-1" onClick={() => navigate(`/notes/${id}/edit`)}>
+                                    <i className="fa-solid fa-pen me-2"></i>Edit
+                                </button>
+                                <button type="button" className="btn btn btn-outline-danger mx-1" onClick={() => setShowDeleteModal(true)}>
+                                    <i className="fa-solid fa-trash-can me-2"></i>Delete
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                )
-            }
-        </div>
+                    ) : (
+                        <div className="card w-100 border-0 mt-2">
+                            <div className="card-body d-flex justify-content-end">
+                                <button type="button" className="btn btn-outline-secondary mx-1" onClick={() => navigate("/dashboard")}> Cancel </button>
+                                <button type="button" className="btn btn-outline-primary mx-1" onClick={onSave}> Save </button>
+                            </div>
+                        </div>
+                    )
+                }
+            </div>
         </>
     );
 }

@@ -20,7 +20,7 @@ const Pagination = ({ notes }) => {
             <main className="pagination-main">
                 <div className="row g-3">
                     {currentNotes.map((note) => (
-                        <Link to={`/notes/${note.id}/view`} key={note.id} className="col-12 col-md-6 col-lg-4 col-xl-3 text-decoration-none">
+                        <Link to={`/notes/${note.id}/view`} key={note.id} className="col-12 col-md-6 col-lg-4 text-decoration-none">
                             <div className="card note-card h-100 border-0">
                                 <div className="card-body">
                                     <h5 className="card-title text-truncate">{note.title}</h5>

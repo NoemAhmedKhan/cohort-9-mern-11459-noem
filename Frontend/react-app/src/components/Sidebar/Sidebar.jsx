@@ -22,61 +22,59 @@ function Sidebar() {
   };
 
   const handleSignOut = () => {
-    // BACKEND LOGIC
-    localStorage.removeItem("TOKEN");
     localStorage.removeItem("USER");
-    navigate("/login");
+    navigate("/");
   };
 
   return (
-    <>
-      {!isOpen && (
-        <button
-          className="sidebar-toggle-btn d-lg-none"
-          onClick={() => setIsOpen(true)}
-          aria-label="Open sidebar"
-        >
-          <i className="fa-solid fa-bars"></i>
-        </button>
-      )}
+      <>
+        {!isOpen && (
+            <button
+                className="sidebar-toggle-btn d-lg-none"
+                onClick={() => setIsOpen(true)}
+                aria-label="Open sidebar"
+            >
+              <i className="fa-solid fa-bars"></i>
+            </button>
+        )}
 
-      {isOpen && <div className="sidebar-backdrop d-lg-none" onClick={closeSidebar}></div>}
+        {isOpen && <div className="sidebar-backdrop d-lg-none" onClick={closeSidebar}></div>}
 
-      <aside className={`sidebar ${isOpen ? "sidebar--open" : ""}`}>
-        <div className="sidebar-brand">
+        <aside className={`sidebar ${isOpen ? "sidebar--open" : ""}`}>
+          <div className="sidebar-brand">
           <span className="sidebar-brand-icon">
             <img src={logo} className="img-fluid" alt="Note Taker Logo"/>
           </span>
-          <span className="sidebar-brand-text">Note Taker</span>
-          <button className="sidebar-close-btn d-lg-none" onClick={closeSidebar} aria-label="Close sidebar">
-            <i className="fa-solid fa-xmark"></i>
-          </button>
-        </div>
+            <span className="sidebar-brand-text">Note Taker</span>
+            <button className="sidebar-close-btn d-lg-none" onClick={closeSidebar} aria-label="Close sidebar">
+              <i className="fa-solid fa-xmark"></i>
+            </button>
+          </div>
 
-        <nav className="sidebar-nav">
-          {NAV_ITEMS.map((item) => {
-            const isActive = location.pathname.startsWith(item.match);
-            return (
-              <button
-                key={item.path}
-                className={`sidebar-nav-item ${isActive ? "active" : ""}`}
-                onClick={() => handleNav(item.path)}
-              >
-                <i className={item.icon}></i>
-                <span>{item.label}</span>
-              </button>
-            );
-          })}
-        </nav>
+          <nav className="sidebar-nav">
+            {NAV_ITEMS.map((item) => {
+              const isActive = location.pathname.startsWith(item.match);
+              return (
+                  <button
+                      key={item.path}
+                      className={`sidebar-nav-item ${isActive ? "active" : ""}`}
+                      onClick={() => handleNav(item.path)}
+                  >
+                    <i className={item.icon}></i>
+                    <span>{item.label}</span>
+                  </button>
+              );
+            })}
+          </nav>
 
-        <div className="sidebar-footer">
-          <button className="sidebar-signout-btn" onClick={handleSignOut}>
-            <i className="fa-solid fa-right-from-bracket"></i>
-            <span>Sign Out</span>
-          </button>
-        </div>
-      </aside>
-    </>
+          <div className="sidebar-footer">
+            <button className="sidebar-signout-btn" onClick={handleSignOut}>
+              <i className="fa-solid fa-right-from-bracket"></i>
+              <span>Sign Out</span>
+            </button>
+          </div>
+        </aside>
+      </>
   );
 }
 
