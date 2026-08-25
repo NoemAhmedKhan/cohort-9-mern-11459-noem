@@ -31,6 +31,7 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validate()) return;
 
     try {
       const res = await fetch('http://localhost:8080/login', {
