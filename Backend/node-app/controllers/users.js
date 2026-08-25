@@ -111,4 +111,4 @@ const handleChangePassword = async (req, res) => {
 }
 
 
-module.exports = { handleSignup, handleLogin, handleDashboard, handleProfile, handleEditProfile, handleChangePassword, handleChangePassword }
+module.exports = { handleSignup, handleLogin, handleLogout, handleDashboard, handleProfile, handleEditProfile, handleChangePassword, handleChangePassword }

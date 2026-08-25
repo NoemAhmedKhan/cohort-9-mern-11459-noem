@@ -31,7 +31,10 @@ function Sidebar() {
 
       const data = await res.json();
       console.log(`Status: ${res.status}`, 'Data:', data);
-      if(res.ok) navigate("/");;
+      if(res.ok || res.status === 401) {
+        navigate("/");
+        return;
+      }
     } catch (err) {
       console.error(err);
     }

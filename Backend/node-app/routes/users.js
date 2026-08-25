@@ -1,7 +1,7 @@
 const express = require("express");
 const userRouter = express.Router();
 const { validateForm, authenticateUser } = require("../middlewares/auth")
-const { handleSignup, handleLogin, handleDashboard, handleProfile, handleEditProfile, handleChangePassword } = require("../controllers/users");
+const { handleSignup, handleLogin, handleLogout, handleDashboard, handleProfile, handleEditProfile, handleChangePassword } = require("../controllers/users");
 
 userRouter.post("/signup", validateForm, handleSignup)
     .post("/login", validateForm, handleLogin)
