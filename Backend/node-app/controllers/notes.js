@@ -5,7 +5,7 @@ const handleCreateNote = async (req, res) => {
         // INSERT DATA INTO MONGO DB
         const note = await Note.create(
             {
-                title: req.title.trim(),
+                title: req.title,
                 content: req.content,
                 user: req.user.id
             }
@@ -23,10 +23,7 @@ const handleCreateNote = async (req, res) => {
 const handleViewNote = async (req, res) => {
     try{
         const id = req.params.id;
-        const note = await Note.findOne({
-            _id: id,
-            user: req.user.id
-        });
+        const note = await Note.findById(id);
         return await res.status(200).json(note);
     }catch (error){
         return res.status(400).json({message: "Error occurred!"});
@@ -36,7 +33,7 @@ const handleViewNote = async (req, res) => {
 const handleUpdateNote = async (req, res) => {
     try {
         const id = req.params.id;
-        await Note.findOneAndUpdate({_id: id, user: req.user.id}, {title: req.title, content: req.content});
+        await Note.findOneAndUpdate({_id: id}, {title: req.title, content: req.content});
         return await res.status(200).json({id: id, title: req.title, message: "Note updated!"});
     }catch (error){
         return res.status(400).json({message: "Error occurred!"});
@@ -46,7 +43,7 @@ const handleUpdateNote = async (req, res) => {
 const handleDeleteNote = async (req, res) => {
     try{
         const id = req.params.id;
-        await Note.deleteOne({_id: id, user: req.user.id});
+        await Note.deleteOne({_id: id});
         return await res.status(200).json({id: id, message: "Note deleted!"});
     }catch (error){
         return res.status(400).json({message: "Error occurred!"});
