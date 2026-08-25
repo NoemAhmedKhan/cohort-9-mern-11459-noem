@@ -21,9 +21,20 @@ function Sidebar() {
     closeSidebar();
   };
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
     localStorage.removeItem("USER");
-    navigate("/");
+    try {
+      const res = await fetch(`http://localhost:8080/logout`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+
+      const data = await res.json();
+      console.log(`Status: ${res.status}`, 'Data:', data);
+      if(res.ok) navigate("/");;
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

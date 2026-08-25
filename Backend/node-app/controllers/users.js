@@ -46,6 +46,15 @@ const handleLogin = async (req, res) => {
     }
 }
 
+const handleLogout = async (req, res) => {
+    try{
+        res.clearCookie("token");
+        return res.status(200).json({message: "Logout Successful!"});
+    }catch (error) {
+        res.status(401).json({message: error});
+    }
+}
+
 const handleDashboard = async (req, res) => {
     try{
         const Notes = await Note.find({user: req.user.id});

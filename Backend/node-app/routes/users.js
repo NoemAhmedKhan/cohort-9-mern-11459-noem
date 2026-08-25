@@ -8,6 +8,7 @@ userRouter.post("/signup", validateForm, handleSignup)
     .get("/dashboard", authenticateUser, handleDashboard)
     .get("/profile", authenticateUser, handleProfile)
     .patch("/profile/edit", authenticateUser, handleEditProfile)
-    .patch("/profile/changepassword", authenticateUser, handleChangePassword);
+    .patch("/profile/changepassword", authenticateUser, handleChangePassword)
+    .delete("/logout", authenticateUser, handleLogout);
 
 module.exports = userRouter;
