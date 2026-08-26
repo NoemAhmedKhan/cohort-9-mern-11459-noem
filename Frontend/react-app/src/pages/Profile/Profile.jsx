@@ -4,6 +4,7 @@ import Sidebar from "../../components/Sidebar/Sidebar"
 import EditProfileModal from "../../modals/EditProfileModal";
 import ChangePasswordModal from "../../modals/ChangePasswordModal";
 import "./Profile.css";
+import { logger } from "../../utils/logger";
 
 const Profile = () => {
     const [showEditProfile, setShowEditProfile] = useState(false);
@@ -23,8 +24,9 @@ const Profile = () => {
                     });
 
                     const data = await res.json();
-                    console.log(`Status: ${res.status}`, 'Data:', data);
+                    logger.info(`Profile fetch — status ${res.status}`);
                     if(res.status === 401) {
+                        logger.warn('Profile fetch — session expired, redirecting to login');
                         navigate("/login");
                         localStorage.removeItem("USER");
                         return;
@@ -35,7 +37,7 @@ const Profile = () => {
                         setProfile(data);
                     }
                 } catch (err) {
-                    console.error(err);
+                    logger.error('Profile.jsx: Profile fetch failed', err.message);
                 }
             }
 

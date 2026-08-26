@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthHeader from "../../components/Auth/AuthHeader";
 import "./Login.css";
+import { logger } from "../../utils/logger";
 
 const EMAIL_REGEX = /^[^\s@]+@gmail\.com$/i;
 
@@ -44,10 +45,13 @@ function Login() {
       });
 
       const data = await res.json();
-      console.log(`Status: ${res.status}`, 'Data:', data);
+      logger.info(`Login — status ${res.status}`);
+      if(res.status === 400 || res.status === 401) {
+        logger.warn(`Login failed — ${data.message || 'invalid credentials'}`);
+      }
       if(res.ok) navigate("/dashboard");
     } catch (err) {
-      console.error(err);
+      logger.error('Login.jsx: Login request failed', err.message);
     }
   };
 

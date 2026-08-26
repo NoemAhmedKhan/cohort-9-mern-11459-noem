@@ -2,6 +2,7 @@ import {useEffect, useState} from "react"
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar/Sidebar"
 import Pagination from "../../components/Pagination/Pagination"
+import { logger } from "../../utils/logger";
 
 const Dashboard = () => {
 
@@ -37,8 +38,9 @@ const Dashboard = () => {
                     });
 
                     const data = await res.json();
-                    console.log(`Status: ${res.status}`, 'Data:', data);
+                    logger.info(`Dashboard fetch — status ${res.status}`);
                     if(!res.ok) {
+                        logger.warn('Dashboard fetch — request unsuccessful, redirecting to login');
                         localStorage.removeItem("USER");
                         navigate("/login");
                         return;
@@ -55,7 +57,7 @@ const Dashboard = () => {
 
                     setNotes(formattedNotes);
                 } catch (err) {
-                    console.error(err);
+                    logger.error('Dashboard.jsx: Dashboard fetch failed', err.message);
                 }
             }
 
