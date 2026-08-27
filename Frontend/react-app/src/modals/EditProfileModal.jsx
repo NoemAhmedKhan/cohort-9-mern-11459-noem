@@ -1,14 +1,55 @@
-import { useState } from "react";
+import {useEffect, useState} from "react"
+import {useNavigate} from "react-router-dom";
 import "./ProfileModal.css";
 
 const EditProfileModal = ({ show, profile, onClose }) => {
-    const [fullName, setFullName] = useState(profile?.fullName || "");
-    const [email, setEmail] = useState(profile?.email || "");
+    const [fullName, setFullName] = useState("" );
+    const [email, setEmail] = useState(  "" );
+    const navigate = useNavigate();
+
+    useEffect(() => {
+            const fetchFields = async () => {
+                const profile = localStorage.getItem("USER");
+                if(profile) {
+                    const storedProfile = JSON.parse(profile);
+                    setFullName(storedProfile.fullName);
+                    setEmail(storedProfile.email);
+                }
+            }
+
+            fetchFields();
+        }, [profile]
+    );
 
     if (!show) return null;
 
-    const handleSave = () => {
-        // POST API
+    const handleSave = async () => {
+        try {
+            const res = await fetch(`http://localhost:8080/profile/edit`, {
+                method: 'PATCH',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({fullName: fullName, email: email})
+            });
+
+            const data = await res.json();
+            console.log(`Status: ${res.status}`, 'Data:', data);
+            if(res.status === 401) {
+                navigate("/login");
+                localStorage.removeItem("USER");
+                return;
+            }
+
+            if(res.ok) {
+                localStorage.setItem("USER", JSON.stringify({fullName: fullName, email: email}));
+                onClose();
+                navigate("/dashboard")
+            }
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     return (

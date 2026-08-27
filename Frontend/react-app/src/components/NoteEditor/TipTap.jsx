@@ -1,7 +1,6 @@
-import { useState, useEffect, forwardRef, useImperativeHandle } from 'react'
+import { useEffect, forwardRef, useImperativeHandle } from 'react'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import Underline from '@tiptap/extension-underline'
 import TextAlign from '@tiptap/extension-text-align'
 import Toolbar from "./Toolbar"
 import "./TipTap.css"
@@ -26,7 +25,10 @@ const TipTap = forwardRef(({ content, editable }, ref) => {
     );
 
     useImperativeHandle(ref, () => ({
-        getContent: () => editor.getJSON()
+        getContent: () => editor.getJSON(),
+        setContent: (content) => {
+            editor.commands.setContent(content);
+        }
     }));
 
     return (

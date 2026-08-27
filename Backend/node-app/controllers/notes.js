@@ -5,7 +5,7 @@ const handleCreateNote = async (req, res) => {
         // INSERT DATA INTO MONGO DB
         const note = await Note.create(
             {
-                title: req.title.trim(),
+                title: req.title,
                 content: req.content,
                 user: req.user.id
             }
@@ -46,7 +46,10 @@ const handleUpdateNote = async (req, res) => {
 const handleDeleteNote = async (req, res) => {
     try{
         const id = req.params.id;
-        await Note.deleteOne({_id: id, user: req.user.id});
+        await Note.deleteOne({
+            _id: id,
+            user: req.user.id
+        });
         return await res.status(200).json({id: id, message: "Note deleted!"});
     }catch (error){
         return res.status(400).json({message: "Error occurred!"});

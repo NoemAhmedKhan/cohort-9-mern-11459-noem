@@ -1,36 +1,87 @@
-import { useEffect } from "react"
+import {useEffect, useState} from "react"
+import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar/Sidebar"
 import Pagination from "../../components/Pagination/Pagination"
 
 const Dashboard = () => {
 
-    useEffect(
-        () => {
-            // Fetch JWT From LocalStorage
-            // Fetch User Details From LocalStorage
-            // Validate JWT
-            //     GET API
-           //     Fetch Notes
+    // Helper Function to extract text of the note content
+    function extractText(node) {
+        if (!node) return '';
+
+        // If the node has direct text then return
+        if (node.text) {
+            return node.text;
+        }
+
+        // If the node has child content, map and join them
+        if (node.content && Array.isArray(node.content)) {
+            return node.content.map(extractText).join('');
+        }
+
+        return '';
+    }
+
+    const navigate = useNavigate();
+    const [notes, setNotes] = useState([]);
+    const [searchValue, setSearchValue] = useState("");
+
+    useEffect(() => {
+            const fetchDashboard = async () => {
+                try {
+                    const res = await fetch('http://localhost:8080/dashboard', {
+                        method: 'GET',
+                        credentials: 'include',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    const data = await res.json();
+                    console.log(`Status: ${res.status}`, 'Data:', data);
+                    if(!res.ok) {
+                        localStorage.removeItem("USER");
+                        navigate("/login");
+                        return;
+                    }
+
+                    const formattedNotes = data.map((note) => (
+                            {
+                                id: note._id,
+                                title: note.title,
+                                content: extractText(note.content)
+                            }
+                        )
+                    );
+
+                    setNotes(formattedNotes);
+                } catch (err) {
+                    console.error(err);
+                }
+            }
+
+            fetchDashboard();
         }, []
+    );
+
+    const filteredNotes = notes.filter((note) =>
+        note.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+        note.content.toLowerCase().includes(searchValue.toLowerCase())
     );
 
     return (
         <>
-        <Sidebar />
-        <Pagination notes={
-            [
-                {id: 1, title: "Morning Reminder", content: "Start the day without checking social media. Drink water, make a plan, and finish the most important task first."},
-                {id: 2, title: "Weekend Plans", content: "Clean the workspace, organize project files, back up important documents, watch a movie, and spend some time away from the computer."},
-                {id: 3, title: "Quote of the Day", content: "Success is the sum of small efforts, repeated day in and day out."},
-                {id: 4, title: "Things to Remember", content: "Don't forget to charge the laptop, back up important files, reply to pending messages, and check tomorrow's schedule before going to bed."},
-                {id: 5, title: "Random Idea", content: "Create a simple productivity app that turns a large goal into smaller daily tasks and shows progress using a visual timeline."},
-                {id: 6, title: "Books to Read", content: "1. Atomic Habits 2. Deep Work 3. The Psychology of Money 4. The Alchemist 5. The Pragmatic Programmer"},
-                {id: 7, title: "Evening Reflection", content: "Today wasn't perfect, but I made progress. Tomorrow I want to focus less on distractions and more on completing the tasks that actually matter."},
-                {id: 8, title: "Quick Reminder", content: "Call the bank tomorrow morning and check whether the pending transaction has been processed."},
-                {id: 9, title: "Coding Tip", content: "When debugging, don't change multiple things at once. Reproduce the problem, isolate the cause, make one change, and test again."},
-                {id: 10, title: "Travel Idea", content: "Plan a short weekend trip somewhere quiet. Look for a place with good scenery, comfortable accommodation, and minimal crowds."}
-            ]
-        } />
+            <Sidebar />
+            <div className="container my-4 w-50">
+                <input
+                    type="search"
+                    className="form-control"
+                    placeholder="Search notes..."
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
+                />
+            </div>
+            <Pagination notes={filteredNotes} />
         </>
     );
 }
