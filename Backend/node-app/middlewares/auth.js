@@ -1,4 +1,5 @@
 const { verifyJWT } = require("../security/jwt");
+const logger = require("../utils/logger");
 
 const validateForm = (req, res, next) => {
     const email = req.body.email;
@@ -19,14 +20,21 @@ const validateForm = (req, res, next) => {
 const authenticateUser = async (req, res, next) => {
     try {
         const token = req.cookies.token;
-        if(!token) return res.status(401).json({message: "Unauthorized!"});
+        if(!token) {
+            logger.warn(`Blocked request with no auth token: ${req.method} ${req.originalUrl}`);
+            return res.status(401).json({message: "Unauthorized!"});
+        }
 
         const payload = await verifyJWT(token);
-        if(!payload) return res.status(401).json({message: "Unauthorized!"});
+        if(!payload) {
+            logger.warn(`Blocked request with invalid/expired token: ${req.method} ${req.originalUrl}`);
+            return res.status(401).json({message: "Unauthorized!"});
+        }
 
         req.user = payload;
         next();
     } catch (error) {
+        logger.error(`authenticateUser middleware error: ${error.message}`);
         return res.status(401).json({message: "Access Denied!"});
     }
 };
