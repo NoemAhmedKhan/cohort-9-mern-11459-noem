@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Pagination.css";
 
-const NOTES_PER_PAGE = 12;
+const NOTES_PER_PAGE = 6;
 
 const Pagination = ({ notes }) => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -15,14 +15,18 @@ const Pagination = ({ notes }) => {
         setCurrentPage(page);
     };
 
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [notes]);
+
     return (
         <div className="container d-flex flex-column align-items-end my-auto">
             <main className="pagination-main">
                 <div className="row g-3">
                     {currentNotes.map((note) => (
                         <Link to={`/notes/${note.id}/view`} key={note.id} className="col-12 col-md-6 col-lg-4 text-decoration-none">
-                            <div className="card note-card h-100 border-0">
-                                <div className="card-body">
+                            <div className="card note-card border-0">
+                                <div className="card-body d-flex flex-column justify-content-center">
                                     <h5 className="card-title text-truncate">{note.title}</h5>
                                     <p className="card-text note-preview text-truncate">
                                         {typeof note.content === "string" ? note.content : "No preview available"}
