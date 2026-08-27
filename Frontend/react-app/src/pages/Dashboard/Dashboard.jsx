@@ -24,6 +24,7 @@ const Dashboard = () => {
 
     const navigate = useNavigate();
     const [notes, setNotes] = useState([]);
+    const [searchValue, setSearchValue] = useState("");
 
     useEffect(() => {
             const fetchDashboard = async () => {
@@ -63,10 +64,24 @@ const Dashboard = () => {
         }, []
     );
 
+    const filteredNotes = notes.filter((note) =>
+        note.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+        note.content.toLowerCase().includes(searchValue.toLowerCase())
+    );
+
     return (
         <>
             <Sidebar />
-            <Pagination notes={notes} />
+            <div className="container my-4 w-50">
+                <input
+                    type="search"
+                    className="form-control"
+                    placeholder="Search notes..."
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
+                />
+            </div>
+            <Pagination notes={filteredNotes} />
         </>
     );
 }
