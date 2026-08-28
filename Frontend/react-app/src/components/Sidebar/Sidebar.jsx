@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./Sidebar.css";
 import logo from "../../assets/logo.png";
+import { logger } from "../../utils/logger";
 
 const NAV_ITEMS = [
   { icon: "fa-solid fa-table-columns", label: "Dashboard", path: "/dashboard", match: "/dashboard" },
@@ -30,13 +31,13 @@ function Sidebar() {
       });
 
       const data = await res.json();
-      console.log(`Status: ${res.status}`, 'Data:', data);
+      logger.info(`Sign out — status ${res.status}`);
       if(res.ok || res.status === 401) {
         navigate("/");
         return;
       }
     } catch (err) {
-      console.error(err);
+      logger.error('Sidebar.jsx: Sign out failed', err.message);
     }
   };
 

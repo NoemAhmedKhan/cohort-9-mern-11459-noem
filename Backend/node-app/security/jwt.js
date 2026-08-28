@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require("../config/env");
+const logger = require("../utils/logger");
 
 const generateJWT = async (user) => {
     const payload = {
@@ -15,7 +16,7 @@ const verifyJWT = async (token) => {
     try {
         return jwt.verify(token, JWT_SECRET);
     }catch (error) {
-        console.error(error);
+        logger.warn(`JWT verification failed: ${error.message}`);
     }
 }
 

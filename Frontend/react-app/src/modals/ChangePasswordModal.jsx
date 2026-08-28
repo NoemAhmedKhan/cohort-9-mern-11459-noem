@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {useNavigate} from "react-router-dom";
 import "./ProfileModal.css";
+import { logger } from "../../utils/logger";
 
 const PASSWORD_REGEX = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).+$/;
 
@@ -51,14 +52,16 @@ const ChangePasswordModal = ({ show, onClose }) => {
             });
 
             const data = await res.json();
-            console.log(`Status: ${res.status}`, 'Data:', data);
+            logger.info(`Change password — status ${res.status}`);
             if(res.status === 401) {
+                logger.warn('Change password — session expired, redirecting to login');
                 navigate("/login");
                 localStorage.removeItem("USER");
                 return;
             }
 
             if(res.status === 400) {
+                logger.warn(`Change password — validation error: ${data.message}`);
                 alert(data.message);
             }
 
@@ -67,7 +70,7 @@ const ChangePasswordModal = ({ show, onClose }) => {
                 navigate("/dashboard")
             }
         } catch (err) {
-            console.error(err);
+            logger.error('ChangePasswordModal.jsx: Password change failed', err.message);
         }
     };
 

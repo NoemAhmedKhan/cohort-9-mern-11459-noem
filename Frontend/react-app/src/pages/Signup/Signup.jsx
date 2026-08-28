@@ -2,6 +2,7 @@ import {useState} from "react";
 import { Link } from "react-router-dom";
 import AuthHeader from "../../components/Auth/AuthHeader";
 import "./Signup.css";
+import { logger } from "../../utils/logger";
 
 const EMAIL_REGEX = /^[^\s@]+@gmail\.com$/i;
 const PASSWORD_REGEX = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).+$/;
@@ -52,9 +53,12 @@ function Signup() {
       })
 
       const data = await res.json();
-      console.log(`Status: ${res.status}`, 'Data:', data);
+      logger.info(`Signup — status ${res.status}`);
+      if(res.status === 400) {
+        logger.warn(`Signup failed — ${data.message || 'invalid data'}`);
+      }
     } catch (err) {
-      console.error(err);
+      logger.error('Signup.jsx: Signup request failed', err.message);
     }
   };
 
