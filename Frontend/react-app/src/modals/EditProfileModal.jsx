@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react"
 import {useNavigate} from "react-router-dom";
 import "./ProfileModal.css";
-import { logger } from "../../utils/logger";
+import { logger } from "../utils/logger";
 
 const EditProfileModal = ({ show, profile, onClose }) => {
     const [fullName, setFullName] = useState("" );

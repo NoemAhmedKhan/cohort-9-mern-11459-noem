@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {useNavigate} from "react-router-dom";
 import "./ProfileModal.css";
-import { logger } from "../../utils/logger";
+import { logger } from "../utils/logger";
 
 const PASSWORD_REGEX = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).+$/;
 
