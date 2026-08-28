@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@tiptap/extension-text-align": "^3.29.2",
@@ -34,10 +37,5 @@
     "jsdom": "^30.0.1",
     "vite": "^8.1.1",
     "vitest": "^4.1.11"
-  },
-  "scripts": {
-    "test": "vitest",
-    "test:run": "vitest run",
-    "coverage": "vitest run --coverage"
   }
 }
