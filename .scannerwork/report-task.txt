@@ -1,6 +1,6 @@
-projectKey=NOEM_AK
+projectKey=note-taker-project
 serverUrl=http://localhost:9000
 serverVersion=26.8.0.126808
-dashboardUrl=http://localhost:9000/dashboard?id=NOEM_AK
-ceTaskId=db6a5857-5df6-4287-b1e9-89346bcb6f52
-ceTaskUrl=http://localhost:9000/api/ce/task?id=db6a5857-5df6-4287-b1e9-89346bcb6f52
+dashboardUrl=http://localhost:9000/dashboard?id=note-taker-project
+ceTaskId=fd0929e9-bf57-4c17-82bd-77156090c2d3
+ceTaskUrl=http://localhost:9000/api/ce/task?id=fd0929e9-bf57-4c17-82bd-77156090c2d3
