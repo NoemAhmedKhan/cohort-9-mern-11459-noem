@@ -18,20 +18,25 @@ const validateForm = (req, res, next) => {
 };
 
 const authenticateUser = async (req, res, next) => {
-        const token = req.cookies.token;
-        if(!token) {
-            logger.warn(`Blocked request with no auth token: ${req.method} ${req.originalUrl}`);
-            return res.status(401).json({message: "Unauthorized!"});
-        }
+     try {
+         const token = req.cookies.token;
+         if (!token) {
+             logger.warn(`Blocked request with no auth token: ${req.method} ${req.originalUrl}`);
+             return res.status(401).json({message: "Unauthorized!"});
+         }
 
-        const payload = await verifyJWT(token);
-        if(!payload) {
-            logger.warn(`Blocked request with invalid/expired token: ${req.method} ${req.originalUrl}`);
-            return res.status(401).json({message: "Unauthorized!"});
-        }
+         const payload = await verifyJWT(token);
+         if (!payload) {
+             logger.warn(`Blocked request with invalid/expired token: ${req.method} ${req.originalUrl}`);
+             return res.status(401).json({message: "Unauthorized!"});
+         }
 
-        req.user = payload;
-        return next();
+         req.user = payload;
+         return next();
+     }catch (error) {
+         logger.error(`Blocked request with invalid/expired token: ${req.method} ${req.originalUrl}`);
+         return res.status(401).json({message: "Unauthorized!"});
+     }
 };
 
 const validateNote = (req, res, next) => {

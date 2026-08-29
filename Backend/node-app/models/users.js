@@ -29,13 +29,8 @@ const schema = mongoose.Schema({
 schema.pre('save', async function () {
     if (!this.isModified('password')) return;
 
-    try {
         const saltRound = 12;
         this.password = await bcrypt.hash(this.password, saltRound);
-    } catch (error) {
-        logger.warn(`Save password failed: `, error.message);
-        res.status(400).json({message: "Save password failed!"});
-    }
 });
 
 const User = mongoose.model("User", schema);

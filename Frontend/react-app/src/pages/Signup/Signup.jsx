@@ -53,12 +53,16 @@ function Signup() {
         body: JSON.stringify({ fullName: formData.fullName, email: formData.email, password: formData.password }),
       })
 
+      const data = await res.json();
       if(res.status === 400) {
         logger.warn(`Signup failed — ${data.message || 'invalid data'}`);
       }
 
-      logger.info(`Signup — status ${res.status}`);
-      navigate("/login");
+      if(res.ok) {
+        logger.info(`Signup — status ${res.status}`);
+        navigate("/login");
+        return;
+      }
     } catch (err) {
       logger.error('Signup.jsx: Signup request failed', err.message);
     }
