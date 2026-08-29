@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
+const logger = require("../utils/logger");
 
 const schema = mongoose.Schema({
     fullName: {
@@ -32,7 +33,8 @@ schema.pre('save', async function () {
         const saltRound = 12;
         this.password = await bcrypt.hash(this.password, saltRound);
     } catch (error) {
-        throw new Error('Save password failed!');
+        logger.warn(`Save password failed: `, error.message);
+        res.status(400).json({message: "Save password failed!"});
     }
 });
 
