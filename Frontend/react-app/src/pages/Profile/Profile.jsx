@@ -23,7 +23,6 @@ const Profile = () => {
                         }
                     });
 
-                    logger.info(`Profile fetch — status ${res.status}`);
                     if(res.status === 401) {
                         logger.warn('Profile fetch — session expired, redirecting to login');
                         navigate("/login");
@@ -31,6 +30,8 @@ const Profile = () => {
                         return;
                     }
 
+                    const data = await res.json();
+                    logger.info(`Profile fetch — status ${res.status}`);
                     if(res.ok) {
                         localStorage.setItem("USER", JSON.stringify(data));
                         setProfile(data);

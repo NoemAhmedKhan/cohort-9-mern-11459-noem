@@ -38,13 +38,15 @@ const Dashboard = () => {
                         }
                     });
 
-                    logger.info(`Dashboard fetch — status ${res.status}`);
                     if(!res.ok) {
                         logger.warn('Dashboard fetch — request unsuccessful, redirecting to login');
                         localStorage.removeItem("USER");
                         navigate("/login");
                         return;
                     }
+
+                    const data = await res.json();
+                    logger.info(`Dashboard fetch — status ${res.status}`);
 
                     const formattedNotes = data.map((note) => (
                             {
