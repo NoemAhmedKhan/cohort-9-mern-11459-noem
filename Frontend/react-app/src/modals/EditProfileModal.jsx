@@ -35,7 +35,6 @@ const EditProfileModal = ({ show, profile, onClose }) => {
                 body: JSON.stringify({fullName: fullName, email: email})
             });
 
-            const data = await res.json();
             logger.info(`Edit profile — status ${res.status}`);
             if(res.status === 401) {
                 logger.warn('Edit profile — session expired, redirecting to login');
@@ -57,11 +56,11 @@ const EditProfileModal = ({ show, profile, onClose }) => {
     return (
         <>
             <div className="modal-backdrop fade show"></div>
-            <div className="modal fade show d-block" tabIndex="-1" role="dialog">
+            <dialog className="modal fade show d-block" open aria-labelledby="edit-profile-title">
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content profile-modal-content border-0">
                         <div className="modal-header border-0">
-                            <h5 className="modal-title">Edit Profile</h5>
+                            <h5 id="edit-profile-title" className="modal-title">Edit Profile</h5>
                             <button type="button" className="btn-close" onClick={onClose} aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
@@ -92,7 +91,7 @@ const EditProfileModal = ({ show, profile, onClose }) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </dialog>
         </>
     );
 };

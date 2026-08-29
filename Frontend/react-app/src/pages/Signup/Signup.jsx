@@ -56,8 +56,7 @@ function Signup() {
       if(res.status === 400) {
         logger.warn(`Signup failed — ${data.message || 'invalid data'}`);
       }
-
-      const data = await res.json();
+      
       logger.info(`Signup — status ${res.status}`);
       navigate("/login");
     } catch (err) {

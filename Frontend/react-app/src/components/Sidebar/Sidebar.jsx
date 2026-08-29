@@ -30,7 +30,6 @@ function Sidebar() {
         credentials: 'include',
       });
 
-      const data = await res.json();
       logger.info(`Sign out — status ${res.status}`);
       if(res.ok || res.status === 401) {
         navigate("/");
@@ -46,6 +45,7 @@ function Sidebar() {
         {!isOpen && (
             <button
                 className="sidebar-toggle-btn d-lg-none"
+                type="button"
                 onClick={() => setIsOpen(true)}
                 aria-label="Open sidebar"
             >
@@ -53,7 +53,7 @@ function Sidebar() {
             </button>
         )}
 
-        {isOpen && <div className="sidebar-backdrop d-lg-none" onClick={closeSidebar}></div>}
+        {isOpen && <button className="sidebar-backdrop d-lg-none" type="button" onClick={closeSidebar}></button>}
 
         <aside className={`sidebar ${isOpen ? "sidebar--open" : ""}`}>
           <div className="sidebar-brand">
@@ -61,7 +61,7 @@ function Sidebar() {
             <img src={logo} className="img-fluid" alt="Note Taker Logo"/>
           </span>
             <span className="sidebar-brand-text">Note Taker</span>
-            <button className="sidebar-close-btn d-lg-none" onClick={closeSidebar} aria-label="Close sidebar">
+            <button className="sidebar-close-btn d-lg-none" type="button" onClick={closeSidebar} aria-label="Close sidebar">
               <i className="fa-solid fa-xmark"></i>
             </button>
           </div>
@@ -72,6 +72,7 @@ function Sidebar() {
               return (
                   <button
                       key={item.path}
+                      type="button"
                       className={`sidebar-nav-item ${isActive ? "active" : ""}`}
                       onClick={() => handleNav(item.path)}
                   >
@@ -83,7 +84,7 @@ function Sidebar() {
           </nav>
 
           <div className="sidebar-footer">
-            <button className="sidebar-signout-btn" onClick={handleSignOut}>
+            <button className="sidebar-signout-btn" type="button" onClick={handleSignOut}>
               <i className="fa-solid fa-right-from-bracket"></i>
               <span>Sign Out</span>
             </button>

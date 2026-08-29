@@ -18,7 +18,6 @@ const validateForm = (req, res, next) => {
 };
 
 const authenticateUser = async (req, res, next) => {
-    try {
         const token = req.cookies.token;
         if(!token) {
             logger.warn(`Blocked request with no auth token: ${req.method} ${req.originalUrl}`);
@@ -32,15 +31,13 @@ const authenticateUser = async (req, res, next) => {
         }
 
         req.user = payload;
-        next();
-    } catch (error) {
+        return next();
+
         logger.error(`authenticateUser middleware error: ${error.message}`);
         return res.status(401).json({message: "Access Denied!"});
-    }
 };
 
 const validateNote = (req, res, next) => {
-    try {
         const { title, content } = req.body;
         // TITLE VALIDATION
         if (typeof title !== "string") {
@@ -77,10 +74,9 @@ const validateNote = (req, res, next) => {
 
         req.title = title;
         req.content = content;
-        next();
-    }catch (error) {
+        return next();
+
         res.status(400).json({message: "Error occurred!"});
-    }
 };
 
 module.exports = { authenticateUser, validateForm, validateNote };

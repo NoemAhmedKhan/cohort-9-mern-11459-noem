@@ -38,7 +38,6 @@ const Dashboard = () => {
                         }
                     });
 
-                    const data = await res.json();
                     logger.info(`Dashboard fetch — status ${res.status}`);
                     if(!res.ok) {
                         logger.warn('Dashboard fetch — request unsuccessful, redirecting to login');
@@ -74,10 +73,10 @@ const Dashboard = () => {
     return (
         <>
             <Sidebar />
-            <div className="container my-4 w-50">
+            <div className="container my-4 d-flex justify-content-end">
                 <input
                     type="search"
-                    className="form-control"
+                    className="form-control w-50 mx-4"
                     placeholder="Search notes..."
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}
