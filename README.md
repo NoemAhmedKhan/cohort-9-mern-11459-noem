@@ -129,6 +129,7 @@ When the user signs out, the authentication cookie is removed.
 cohort_9_MERN_11459_Noem/
 │
 ├── backend/
+├── node-app/
 │   ├── config/
 │   ├── controllers/
 │   ├── middlewares/
@@ -143,6 +144,7 @@ cohort_9_MERN_11459_Noem/
 │   └── package.json
 │
 ├── frontend/
+├── react-app/
 │   ├── public/
 │   ├── src/
 │   ├── package.json
