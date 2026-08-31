@@ -60,7 +60,7 @@ const handleLogin = async (req, res) => {
 const handleLogout = async (req, res) => {
     try{
         res.clearCookie("token");
-        logger.info(`User logged out: ${req.user && req.user.id}`);
+        logger.info(`User logged out: ${req.user?.id}`);
         return res.status(200).json({message: "Logout Successful!"});
     }catch (error) {
         logger.error(`Logout error: ${error.message}`);
@@ -73,7 +73,7 @@ const handleDashboard = async (req, res) => {
         const Notes = await Note.find({user: req.user.id});
         return res.status(200).json(Notes);
     }catch (error) {
-        logger.error(`Dashboard fetch failed for user ${req.user && req.user.id}: ${error.message}`);
+        logger.error(`Dashboard fetch failed for user ${req.user?.id}: ${error.message}`);
         res.status(401).json({message: "Access Denied!"});
     }
 }
@@ -104,9 +104,13 @@ const handleEditProfile = async (req, res) => {
         });
 
         logger.info(`Profile updated for user ${req.user.id}`);
-        return res.status(200).json(updatedUser);
+        return res.status(200).json({
+            fullName: updatedUser.fullName,
+            email: updatedUser.email,
+            message: "Profile updated!"
+        });
     }catch (error) {
-        logger.error(`Edit profile failed for user ${req.user && req.user.id}: ${error.message}`);
+        logger.error(`Edit profile failed for user ${req.user?.id}: ${error.message}`);
         res.status(401).json({message: "Access Denied!"});
     }
 }
@@ -115,6 +119,10 @@ const handleChangePassword = async (req, res) => {
     try{
         const { oldPassword, newPassword } = req.body;
         const user = await User.findById(req.user.id).select("+password");
+        if (!user) {
+            logger.warn(`Failed to find unknown user: ${req.user.id}`);
+            return res.status(401).json({message: "Access Denied!"});
+        }
 
         const isMatch = await bcrypt.compare(oldPassword, user.password);
         if(!isMatch) {
@@ -127,7 +135,7 @@ const handleChangePassword = async (req, res) => {
         logger.info(`Password changed for user ${req.user.id}`);
         return res.status(200).json({message: "Password changed successfully!"});
     }catch (error) {
-        logger.error(`Change password failed for user ${req.user && req.user.id}: ${error.message}`);
+        logger.error(`Change password failed for user ${req.user?.id}: ${error.message}`);
         res.status(401).json({message: "Access Denied!"});
     }
 }

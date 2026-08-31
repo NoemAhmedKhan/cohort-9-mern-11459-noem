@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
+const logger = require("../utils/logger");
 
 const schema = mongoose.Schema({
     fullName: {
@@ -28,12 +29,8 @@ const schema = mongoose.Schema({
 schema.pre('save', async function () {
     if (!this.isModified('password')) return;
 
-    try {
         const saltRound = 12;
         this.password = await bcrypt.hash(this.password, saltRound);
-    } catch (error) {
-        throw new Error('Save password failed!');
-    }
 });
 
 const User = mongoose.model("User", schema);

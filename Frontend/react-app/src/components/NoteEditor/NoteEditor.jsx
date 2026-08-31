@@ -9,7 +9,7 @@ function NoteEditor() {
     const navigate = useNavigate();
     const {id, mode} = useParams();
     const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
+    const [content] = useState("");
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const isReadOnly = mode === "view";
     const tiptapRef = useRef(null);
@@ -37,13 +37,13 @@ function NoteEditor() {
                 body: JSON.stringify(note)
             });
 
-            const data = await res.json();
-            logger.info(`Note created — status ${res.status}`);
             if(res.status === 401) {
                 logger.warn('Create note — session expired, redirecting to login');
                 localStorage.removeItem("USER");
                 navigate("/login");
             }
+
+            logger.info(`Note created — status ${res.status}`);
             if(res.ok) navigate("/dashboard");
         } catch (err) {
             logger.error('NoteEditor.jsx: Note creation failed', err.message);
@@ -66,13 +66,14 @@ function NoteEditor() {
                 body: JSON.stringify(note)
             });
 
-            const data = await res.json();
-            logger.info(`Note edited — status ${res.status}`);
             if(res.status === 401) {
                 logger.warn('Edit note — session expired, redirecting to login');
                 localStorage.removeItem("USER");
                 navigate("/login");
             }
+
+            const data = await res.json();
+            logger.info(`Note edited — status ${res.status}`, data);
             if(res.ok) navigate("/dashboard");
         } catch (err) {
             logger.error('NoteEditor.jsx: Note edit failed', err.message);
@@ -94,13 +95,13 @@ function NoteEditor() {
                 },
             });
 
-            const data = await res.json();
-            logger.info(`Note deleted — status ${res.status}`);
             if(res.status === 401) {
                 logger.warn('Delete note — session expired, redirecting to login');
                 localStorage.removeItem("USER");
                 navigate("/login");
             }
+
+            logger.info(`Note deleted — status ${res.status}`);
             if(res.ok) navigate("/dashboard");
         } catch (err) {
             logger.error('NoteEditor.jsx: Note deletion failed', err.message);
@@ -126,8 +127,6 @@ function NoteEditor() {
                         }
                     });
 
-                    const data = await res.json();
-                    logger.info(`Note fetched — status ${res.status}`);
                     if(res.status === 401) {
                         logger.warn('Fetch note — session expired, redirecting to login');
                         localStorage.removeItem("USER");
@@ -135,6 +134,8 @@ function NoteEditor() {
                         return;
                     }
 
+                    const data = await res.json();
+                    logger.info(`Note fetched — status ${res.status}`, data);
                     if(res.ok) {
                         setTitle(data.title);
                         tiptapRef.current.setContent(data.content);

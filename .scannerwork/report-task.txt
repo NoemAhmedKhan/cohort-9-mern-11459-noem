@@ -1,0 +1,6 @@
+projectKey=note-taker-project
+serverUrl=http://localhost:9000
+serverVersion=26.8.0.126808
+dashboardUrl=http://localhost:9000/dashboard?id=note-taker-project
+ceTaskId=fd0929e9-bf57-4c17-82bd-77156090c2d3
+ceTaskUrl=http://localhost:9000/api/ce/task?id=fd0929e9-bf57-4c17-82bd-77156090c2d3

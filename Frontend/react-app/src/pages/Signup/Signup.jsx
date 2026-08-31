@@ -1,5 +1,5 @@
 import {useState} from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthHeader from "../../components/Auth/AuthHeader";
 import "./Signup.css";
 import { logger } from "../../utils/logger";
@@ -12,6 +12,7 @@ function Signup() {
   const [errors, setErrors] = useState({ fullName: "", email: "", password: "", confirm: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -53,9 +54,14 @@ function Signup() {
       })
 
       const data = await res.json();
-      logger.info(`Signup — status ${res.status}`);
       if(res.status === 400) {
         logger.warn(`Signup failed — ${data.message || 'invalid data'}`);
+      }
+
+      if(res.ok) {
+        logger.info(`Signup — status ${res.status}`);
+        navigate("/login");
+        return;
       }
     } catch (err) {
       logger.error('Signup.jsx: Signup request failed', err.message);

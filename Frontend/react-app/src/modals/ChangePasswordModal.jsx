@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {useNavigate} from "react-router-dom";
 import "./ProfileModal.css";
-import { logger } from "../../utils/logger";
+import { logger } from "../utils/logger";
 
 const PASSWORD_REGEX = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).+$/;
 
@@ -77,11 +77,11 @@ const ChangePasswordModal = ({ show, onClose }) => {
     return (
         <>
             <div className="modal-backdrop fade show"></div>
-            <div className="modal fade show d-block" tabIndex="-1" role="dialog">
+            <dialog className="modal fade show d-block" open aria-labelledby="change-password-title">
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content profile-modal-content border-0">
                         <div className="modal-header border-0">
-                            <h5 className="modal-title">Change Password</h5>
+                            <h5 id="change-password-title" className="modal-title">Change Password</h5>
                             <button type="button" className="btn-close" onClick={onClose} aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
@@ -155,7 +155,7 @@ const ChangePasswordModal = ({ show, onClose }) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </dialog>
         </>
     );
 };

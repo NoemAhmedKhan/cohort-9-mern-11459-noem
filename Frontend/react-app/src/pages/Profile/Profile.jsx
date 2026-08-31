@@ -23,8 +23,6 @@ const Profile = () => {
                         }
                     });
 
-                    const data = await res.json();
-                    logger.info(`Profile fetch — status ${res.status}`);
                     if(res.status === 401) {
                         logger.warn('Profile fetch — session expired, redirecting to login');
                         navigate("/login");
@@ -32,6 +30,8 @@ const Profile = () => {
                         return;
                     }
 
+                    const data = await res.json();
+                    logger.info(`Profile fetch — status ${res.status}`);
                     if(res.ok) {
                         localStorage.setItem("USER", JSON.stringify(data));
                         setProfile(data);
@@ -59,12 +59,12 @@ const Profile = () => {
                         </div>
 
                         <div className="mb-3">
-                            <label className="form-label">Full Name</label>
+                            <label htmlFor="fullName" className="form-label">Full Name</label>
                             <input type="text" className="form-control" value={profile?.fullName || ""} disabled readOnly />
                         </div>
 
                         <div className="mb-4">
-                            <label className="form-label">Email Address</label>
+                            <label htmlFor="email" className="form-label">Email Address</label>
                             <input type="email" className="form-control" value={profile?.email || ""} disabled readOnly />
                         </div>
 

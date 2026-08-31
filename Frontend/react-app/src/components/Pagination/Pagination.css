@@ -5,7 +5,7 @@
 .note-card {
     border: 1px solid var(--color-light);
     transition: var(--transition-fast);
-    height: 180px !important;
+    height: 160px !important;
 }
 
 .note-card:hover {
@@ -44,9 +44,14 @@
     .pagination-main{
         width: calc(100% - 25%);
     }
+
+    .note-card{
+        height: 140px !important;
+    }
 }
 
 @media (max-width: 800px) {
-    .pagination-main{
+    .note-card{
+        height: 100px !important;
     }
 }
